@@ -8,6 +8,7 @@
 var fs = require('fs');
 var express = require('express');
 var app = express();
+var ip=require('ip')
 
 if (!process.env.DISABLE_XORIGIN) {
   app.use(function(req, res, next) {
@@ -37,7 +38,11 @@ app.route('/')
     .get(function(req, res) {
 		  res.sendFile(process.cwd() + '/views/index.html');
     })
-
+app.get('/',function (req,res)
+        {
+  var ipAdress=ip.address();
+  
+});
 // Respond not found to all the wrong routes
 app.use(function(req, res, next){
   res.status(404);
