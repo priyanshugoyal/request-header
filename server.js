@@ -8,7 +8,8 @@
 var fs = require('fs');
 var express = require('express');
 var app = express();
-var ip=require('ip')
+var ip=require('ip');
+const os = require("node.os");
 
 if (!process.env.DISABLE_XORIGIN) {
   app.use(function(req, res, next) {
@@ -38,9 +39,18 @@ app.route('/')
     .get(function(req, res) {
 		  res.sendFile(process.cwd() + '/views/index.html');
     })
-app.get('/',function (req,res)
+app.get('/whoami',function (req,res)
         {
   var ipAdress=ip.address();
+  var language=req.headers["accept-language"];
+  var fil=language.substring( 0, language.indexOf(","));
+  var 
+  var op=os.os;
+  var result={  "ipadress":ipAdress,
+              "language":language,
+              "software":op
+  }
+  res.json(result);
   
 });
 // Respond not found to all the wrong routes
