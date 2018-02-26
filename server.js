@@ -9,7 +9,7 @@ var fs = require('fs');
 var express = require('express');
 var app = express();
 var ip=require('ip');
-const os = require("node.os");
+const os = require("os");
 
 if (!process.env.DISABLE_XORIGIN) {
   app.use(function(req, res, next) {
@@ -43,11 +43,10 @@ app.get('/whoami',function (req,res)
         {
   var ipAdress=ip.address();
   var language=req.headers["accept-language"];
-  var fil=language.substring( 0, language.indexOf(","));
-  var 
-  var op=os.os;
+  var filtered=language.substring( 0, language.indexOf(","));
+  var op=req.headers['];
   var result={  "ipadress":ipAdress,
-              "language":language,
+              "language":filtered,
               "software":op
   }
   res.json(result);
