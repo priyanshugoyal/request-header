@@ -43,11 +43,15 @@ app.get('/whoami',function (req,res)
         {
   var ipAdress=ip.address();
   var language=req.headers["accept-language"];
-  var filtered=language.substring( 0, language.indexOf(","));
-  var op=req.headers['];
+  var filteredLanguage=language.substring( 0, language.indexOf(","));
+  
+  var op=req.headers['user-agent'];
+   var startIndex = op.indexOf('\(');
+  var endIndex = op.indexOf('\)');
+  var trimmedSoftware = op.slice(startIndex + 1, endIndex);
   var result={  "ipadress":ipAdress,
-              "language":filtered,
-              "software":op
+              "language":filteredLanguage,
+              "software":trimmedSoftware
   }
   res.json(result);
   
